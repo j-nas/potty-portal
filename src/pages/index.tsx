@@ -45,32 +45,38 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="h-full">
-        <div className="container flex flex-col">
+        <div className="container  flex flex-col place-items-center">
           <H1 className=" py-12">Potty Portal🚻</H1>
-          <Card className="">
+          <Card className="max-w-sm shadow-2xl shadow-violet-950">
             <CardHeader>
               <CardTitle>Potty Map</CardTitle>
               <CardDescription>
                 Find, add, and rate public restrooms
               </CardDescription>
             </CardHeader>
-            <CardContent className="max-w-sm">
+            <CardContent className="">
               {!geoAvailable ? (
                 <p>location not available</p>
               ) : loading ? (
                 <p>loading</p>
               ) : (
-                <Map
-                  mapboxAccessToken={env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
-                  initialViewState={{
-                    latitude: viewState.latitude,
-                    longitude: viewState.longitude,
-                    zoom: viewState.zoom,
-                  }}
-                  onMove={(evt) => setViewState(evt.viewState)}
-                  style={{ width: "50%", height: "80%" }}
-                  mapStyle="mapbox://styles/mapbox/streets-v11"
-                />
+                <div className="">
+                  <Map
+                    mapboxAccessToken={env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}
+                    initialViewState={{
+                      latitude: viewState.latitude,
+                      longitude: viewState.longitude,
+                      zoom: viewState.zoom,
+                    }}
+                    onMove={(evt) => setViewState(evt.viewState)}
+                    style={{
+                      width: "100%",
+                      height: "300px",
+                      borderRadius: "10px",
+                    }}
+                    mapStyle="mapbox://styles/mapbox/streets-v11"
+                  />
+                </div>
               )}
             </CardContent>
           </Card>

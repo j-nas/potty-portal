@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { H1 } from "~/components/ui/typography";
+import { A, H1 } from "~/components/ui/typography";
 import {
   Card,
   CardContent,
@@ -12,6 +12,7 @@ import { env } from "~/env.mjs";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import AddRestroomSheet from "~/components/AddRestroom";
+import SigninSheet from "~/components/LoginSheet";
 
 export default function Home() {
   const [viewState, setViewState] = useState({
@@ -46,13 +47,13 @@ export default function Home() {
         <meta name="description" content="Crowd-sourced public toilets" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="h-full">
-        <div className="mx-1 flex flex-col place-items-center sm:mx-6">
-          <Card className=" mt-12 w-full shadow-2xl shadow-violet-950">
+      <main className="h-full w-full">
+        <div className=" sm:container ">
+          <Card className=" mt-12 max-h-screen w-full shadow-2xl shadow-violet-950">
             <CardHeader>
               <H1 className="">Potty Portal🚻</H1>
               <CardDescription>
-                Find, add, and rate public restrooms
+                Find, add, and rate public restrooms. <SigninSheet />
               </CardDescription>
             </CardHeader>
             <CardContent className="">
@@ -72,7 +73,7 @@ export default function Home() {
                     onMove={(evt) => setViewState(evt.viewState)}
                     style={{
                       width: "100%",
-                      height: "30rem",
+                      height: "50vh",
                       borderRadius: "10px",
                     }}
                     mapStyle="mapbox://styles/mapbox/streets-v11"

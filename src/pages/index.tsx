@@ -11,6 +11,7 @@ import Map from "react-map-gl";
 import { env } from "~/env.mjs";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
+import AddRestroomSheet from "~/components/AddRestroom";
 
 export default function Home() {
   const [viewState, setViewState] = useState({
@@ -80,7 +81,7 @@ export default function Home() {
               )}
             </CardContent>
             <CardFooter className="space-x-2">
-              <Button>Add restroom</Button>
+              <AddRestroomSheet />
               <Button>My Profile</Button>
             </CardFooter>
           </Card>

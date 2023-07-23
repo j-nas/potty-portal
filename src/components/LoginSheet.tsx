@@ -27,28 +27,15 @@ export default function SigninSheet() {
           </SheetDescription>
         </SheetHeader>
         <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="address" className="text-right">
-              Address
-            </Label>
-            <Input
-              id="address"
-              value="123 main street"
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="locationName" className="text-right">
-              Business or location name
-            </Label>
-            <Input id="locationName" value="Location" className="col-span-3" />
-          </div>
+          <Button className="bg-purple-700">
+            <span className="mr-1 text-lg font-black">G </span> Sign in with
+            Google
+          </Button>
+          <Button className="bg-sky-700">
+            <span className="mr-1 text-lg font-black">f </span> Sign in with
+            Facebook
+          </Button>
         </div>
-        <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit">Submit restroom</Button>
-          </SheetClose>
-        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

@@ -7,12 +7,13 @@ import {
   CardHeader,
   CardFooter,
 } from "~/components/ui/card";
-import Map from "react-map-gl";
+import Map, { GeolocateControl, Marker } from "react-map-gl";
 import { env } from "~/env.mjs";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import AddRestroomSheet from "~/components/AddRestroom";
 import SigninSheet from "~/components/LoginSheet";
+import { api } from "~/utils/api";
 
 export default function Home() {
   const [viewState, setViewState] = useState({
@@ -20,8 +21,16 @@ export default function Home() {
     latitude: 45.2146,
     zoom: 11,
   });
+
   const [loading, setLoading] = useState(true);
   const [geoAvailable, setGeoAvailable] = useState(false);
+
+  const { data, error } = api.location.getAddress.useQuery({
+    lat: viewState.latitude,
+    lng: viewState.longitude,
+  });
+
+  console.log(data);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -77,7 +86,12 @@ export default function Home() {
                       borderRadius: "10px",
                     }}
                     mapStyle="mapbox://styles/mapbox/streets-v11"
-                  />
+                  >
+                    <GeolocateControl
+                      positionOptions={{ enableHighAccuracy: true }}
+                      trackUserLocation={true}
+                    />
+                  </Map>
                 </div>
               )}
             </CardContent>

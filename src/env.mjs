@@ -20,7 +20,7 @@ export const env = createEnv({
       // VERCEL_URL doesn't include `https` so it cant be validated as a URL
       process.env.VERCEL ? z.string().min(1) : z.string().url()
     ),
-    POSITIONSTACK_API_KEY: z.string().min(1),
+    GEOAPIFY_API_KEY: z.string().min(1),
     // Add `.min(1) on ID and SECRET if you want to make sure they're not empty
   },
 
@@ -44,7 +44,7 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN:
       process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,
-    POSITIONSTACK_API_KEY: process.env.POSITIONSTACK_API_KEY,
+    GEOAPIFY_API_KEY: process.env.GEOAPIFY_API_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.

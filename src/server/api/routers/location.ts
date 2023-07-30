@@ -8,9 +8,10 @@ import { getAddress, getCoords } from "~/utils/geoHelpers";
 export const locationRouter = createTRPCRouter({
   getAddress: publicProcedure
     .input(z.object({ lat: z.number(), lng: z.number() }))
-    .query(async () => {
-      const address = await getAddress({ lat: 0, lon: 0 });
-      return address.results[0]
+    .query(async ({ input }) => {
+      console.log(input)
+      const address = await getAddress({ lat: input.lat, lon: input.lng });
+      return address;
     }),
   getCoords: publicProcedure
     .input(z.object({ address: z.string() }))

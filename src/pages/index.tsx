@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { A, H1 } from "~/components/ui/typography";
+import { H1 } from "~/components/ui/typography";
 import {
   Card,
   CardContent,
@@ -13,24 +13,16 @@ import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import AddRestroomSheet from "~/components/AddRestroom";
 import SigninSheet from "~/components/LoginSheet";
-import { api } from "~/utils/api";
 
 export default function Home() {
   const [viewState, setViewState] = useState({
     longitude: -120.6069,
     latitude: 45.2146,
-    zoom: 11,
+    zoom: 13,
   });
 
   const [loading, setLoading] = useState(true);
   const [geoAvailable, setGeoAvailable] = useState(false);
-
-  const { data, error } = api.location.getAddress.useQuery({
-    lat: viewState.latitude,
-    lng: viewState.longitude,
-  });
-
-  console.log(data);
 
   useEffect(() => {
     if ("geolocation" in navigator) {

@@ -13,13 +13,15 @@ const CoordsResponseSchema = z.object({
 })
 
 const AddressResponseSchema = z.object({
-  results: z.array(
+  features: z.array(
     z.object({
-      housenumber: z.string(),
-      street: z.string(),
-      city: z.string(),
-      state_code: z.string(),
-      country: z.string(),
+      properties: z.object({
+        housenumber: z.string(),
+        street: z.string(),
+        city: z.string(),
+        state_code: z.string(),
+        country: z.string(),
+      })
     })
   )
 });
@@ -51,8 +53,12 @@ export async function getAddress(coords: { lat: number; lon: number }) {
       }
     }
   )
-  console.error("hello")
-  console.log(response.data)
 
-  return AddressResponseSchema.parse(response.data)
+  try {
+    return AddressResponseSchema.parse(response.data).features[0]?.properties
+  }
+  catch (err) {
+    console.log(err)
+    return null
+  }
 }

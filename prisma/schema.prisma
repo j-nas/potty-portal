@@ -68,6 +68,8 @@ model Bathroom {
   longitude          Float
   address            String
   locationType       LocationType
+  accessibility      Boolean
+  changingTable      Boolean
   purchaseRequired   Boolean
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt

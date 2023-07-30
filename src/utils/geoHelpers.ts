@@ -38,7 +38,14 @@ export async function getCoords(address: string) {
     }
   )
 
-  return CoordsResponseSchema.parse(response.data)
+  const result = CoordsResponseSchema.parse(response.data).features[0]?.geometry.coordinates
+  if (!result) {
+    throw new Error('Invalid')
+  }
+  return {
+    lat: result[1],
+    lon: result[0]
+  }
 }
 
 export async function getAddress(coords: { lat: number; lon: number }) {

@@ -8,7 +8,7 @@ import { getAddress, getCoords } from "~/utils/geoHelpers";
 import { LocationType } from "@prisma/client";
 
 export const locationRouter = createTRPCRouter({
-  addLocation: publicProcedure
+  addLocation: protectedProcedure
     .input(z.object({
       address: z.string(),
       locationName: z.string(),
@@ -37,7 +37,7 @@ export const locationRouter = createTRPCRouter({
           cleanlinessRatings: {
             create: {
               rating: input.cleanliness,
-              userId: ctx.session.user.id,
+              userId: ctx.auth.userId,
               comment: input.comment,
             },
           }

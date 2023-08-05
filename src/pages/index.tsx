@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import AddRestroomSheet from "~/components/AddRestroom";
 import SigninSheet from "~/components/LoginSheet";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export default function Home() {
   const [viewState, setViewState] = useState({
@@ -88,8 +89,13 @@ export default function Home() {
               )}
             </CardContent>
             <CardFooter className="space-x-2">
-              <AddRestroomSheet />
-              <Button>My Profile</Button>
+              <SignedIn>
+                <UserButton />
+                <AddRestroomSheet />
+              </SignedIn>
+              <SignedOut>
+                <SignInButton />
+              </SignedOut>
             </CardFooter>
           </Card>
         </div>

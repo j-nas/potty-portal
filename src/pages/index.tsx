@@ -7,13 +7,18 @@ import {
   CardHeader,
   CardFooter,
 } from "~/components/ui/card";
-import Map, { GeolocateControl, Marker } from "react-map-gl";
+import Map, { GeolocateControl } from "react-map-gl";
 import { env } from "~/env.mjs";
 import { useEffect, useState } from "react";
 import { Button } from "~/components/ui/button";
 import AddRestroomSheet from "~/components/AddRestroom";
-import SigninSheet from "~/components/LoginSheet";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import {
+  SignInButton,
+  SignOutButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 export default function Home() {
   const [viewState, setViewState] = useState({
@@ -55,7 +60,15 @@ export default function Home() {
             <CardHeader>
               <H1 className="">Potty Portal🚻</H1>
               <CardDescription>
-                Find, add, and rate public restrooms. <SigninSheet />
+                <span className="mr-2">
+                  Find, add, and rate public restrooms.
+                </span>
+                <SignedOut>
+                  <SignInButton mode="modal" />
+                </SignedOut>
+                <SignedIn>
+                  <SignOutButton />
+                </SignedIn>
               </CardDescription>
             </CardHeader>
             <CardContent className="">
@@ -90,11 +103,13 @@ export default function Home() {
             </CardContent>
             <CardFooter className="space-x-2">
               <SignedIn>
-                <UserButton />
+                <UserButton afterSignOutUrl="/" />
                 <AddRestroomSheet />
               </SignedIn>
               <SignedOut>
-                <SignInButton />
+                <SignInButton mode="modal">
+                  <Button>Sign In</Button>
+                </SignInButton>
               </SignedOut>
             </CardFooter>
           </Card>

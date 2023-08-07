@@ -7,19 +7,22 @@ import {
 import { getAddress, getCoords } from "~/utils/geoHelpers";
 import { LocationType } from "@prisma/client";
 
+export const addLocationSchema = z.object({
+  address: z.string(),
+  locationName: z.string(),
+  additionalInfo: z.string().optional(),
+  locationType: z.nativeEnum(LocationType),
+  accessibility: z.boolean(),
+  changingTable: z.boolean(),
+  purchaseRequired: z.boolean(),
+  cleanliness: z.number().min(1).max(5).int(),
+  comment: z.string().optional(),
+});
+
+
 export const locationRouter = createTRPCRouter({
   addLocation: protectedProcedure
-    .input(z.object({
-      address: z.string(),
-      locationName: z.string(),
-      additionalInfo: z.string().optional(),
-      locationType: z.nativeEnum(LocationType),
-      accessibility: z.boolean(),
-      changingTable: z.boolean(),
-      purchaseRequired: z.boolean(),
-      cleanliness: z.number().min(1).max(5).int(),
-      comment: z.string().optional(),
-    }))
+    .input(addLocationSchema)
     .mutation(async ({ input, ctx }) => {
       const coords = await getCoords(input.address);
 
@@ -44,7 +47,7 @@ export const locationRouter = createTRPCRouter({
         },
 
       });
-
+      return location;
     }),
   getAddress: publicProcedure
     .input(z.object({ lat: z.number(), lng: z.number() }))
